@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  strapi:
+    image: strapi/strapi
+    container_name: codex-strapi
+    ports:
+      - ${SERVER_PORT}:1337
+    volumes:
+      - ./api:/usr/src/api/strapi-app
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: $POSTGRES_DB
+      DATABASE_USERNAME: $POSTGRES_USER
+      DATABASE_PASSWORD: $POSTGRES_PASSWORD
+    links:
+      - postgres
+  postgres:
+    image: postgres:11-alpine
+    container_name: codex-postgres
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - ./.pgdata:/var/lib/postgresql/data
+  blog:
+    image: node:dubnium-alpine
+    container_name: codex-blog
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./blog:/home/node/app
+    command: sh -c "yarn && yarn start"
+    environment:
+      SERVER_PORT: 1337
+      SERVER_HOST: strapi
+    ports:
+      - ${BLOG_PORT}:8000
+    links:
+      - strapi

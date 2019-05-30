@@ -37,4 +37,3 @@ If you kepts the default environmnet variables values, you can reach:
 A great thanks to these articles and their author(s) for helping us on this project:
 
 * [https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/](https://blog.strapi.io/building-a-static-website-using-gatsby-and-strapi/)
-construire-un-blog-statique-avec-gatsby-et-strapi/) (in french)

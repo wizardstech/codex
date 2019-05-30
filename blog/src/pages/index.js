@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Layout from '../components/Layout'
+import SEO from '../components/SEO'
+import Markdown from '../components/Markdown';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -16,7 +17,7 @@ const IndexPage = ({ data }) => (
           <h2>
             <Link to={`/articles/${document.node.strapiId}`}>{document.node.title}</Link>
           </h2>
-          <p>{document.node.content}</p>
+          <Markdown source={document.node.content} excerpt />
         </li>
       ))}
     </ul>

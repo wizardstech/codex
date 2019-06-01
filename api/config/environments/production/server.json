@@ -3,8 +3,7 @@
   "port": "${process.env.PORT}",
   "production": true,
   "proxy": {
-    "enabled": false,
-    "ssl": true
+    "enabled": false
   },
   "autoReload": {
     "enabled": false
@@ -13,6 +12,7 @@
     "enabled": false
   },
   "admin": {
+    "autoOpen": false,
     "path": "/dashboard"
   }
 }

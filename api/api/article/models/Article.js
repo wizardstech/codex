@@ -1,5 +1,7 @@
 'use strict';
 
+const axios = require('axios');
+
 /**
  * Lifecycle callbacks for the `Article` model.
  */
@@ -20,7 +22,7 @@ module.exports = {
   // After fetching a value.
   // Fired after a `fetch` operation.
   // afterFetch: async (model, response, options) => {},
-  
+
   // Before fetching all values.
   // Fired before a `fetchAll` operation.
   // beforeFetchAll: async (model, columns, options) => {},
@@ -37,6 +39,15 @@ module.exports = {
   // Fired after an `insert` query.
   // afterCreate: async (model, attrs, options) => {},
 
+  afterCreate: async entry => {
+    axios
+      .post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+      .catch(() => {
+        // Ignore
+      });
+  },
+
+
   // Before updating a value.
   // Fired before an `update` query.
   // beforeUpdate: async (model, attrs, options) => {},
@@ -44,6 +55,13 @@ module.exports = {
   // After updating a value.
   // Fired after an `update` query.
   // afterUpdate: async (model, attrs, options) => {},
+  afterUpdate: async entry => {
+    axios
+      .post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+      .catch(() => {
+        // Ignore
+      });
+  },
 
   // Before destroying a value.
   // Fired before a `delete` query.
@@ -52,4 +70,11 @@ module.exports = {
   // After destroying a value.
   // Fired after a `delete` query.
   // afterDestroy: async (model, attrs, options) => {}
+  afterDestroy: async entry => {
+    axios
+      .post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+      .catch(() => {
+        // Ignore
+      });
+  },
 };

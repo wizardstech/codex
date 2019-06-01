@@ -102,3 +102,7 @@ node_modules
 
 testApp
 coverage
+
+# Known issue with heroku
+
+package-lock.json
